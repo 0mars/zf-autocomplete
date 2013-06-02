@@ -1,0 +1,30 @@
+_zf_autocomp() 
+{
+    local cur prev actions
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    acid=`pwd | sed -e 's:/:_:g'`
+    if [ "$prev" = "zf" ] 
+    then
+	if [ ! -f /tmp/"$acid"_actions ]
+	then
+		options=`zf | grep -P "^\s*\033\[36m\s*zf" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | sed -r "s/^\s{2,4}//g"| sort -V  | cut -d ' ' -f 2 | uniq | sed ':a;N;$!ba;s/\n/ /g'`
+		echo $options > /tmp/"$acid"_actions
+	else
+		options=`cat /tmp/"$acid"_actions`
+	fi
+    else
+	if [ ! -f /tmp/"$acid"_providers ]
+        then
+                options=`zf | grep -P "^\s*\033\[36m\s*zf" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | sed -r "s/^\s{2,4}//g"| sort -V  | cut -d ' ' -f 3 | uniq | sed ':a;N;$!ba;s/\n/ /g'`
+                echo $options > /tmp/"$acid"_providers
+        else
+                options=`cat /tmp/"$acid"_providers`
+        fi
+    fi
+
+    COMPREPLY=($(compgen -W "${options}" -- ${cur}))  
+    return 0
+}
+complete -F _zf_autocomp zf
