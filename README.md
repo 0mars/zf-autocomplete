@@ -26,3 +26,9 @@ Custom Providers and Caching
 In case you are wondering, I've got many projects with many custom providers, will it **auto-complete** them?
 
 The answer is **YES**, and it fetches the providers per directory basis. Since the fetching and filtering is a pretty heavy process, it caches the auto-completed options in /tmp/ so that it will only be slow the first time, and then it's going to be blazing fast.
+
+Flush / Clear Cache
+-----------------
+Execute the following on the same directory to clear cache on that directory:
+
+<code>rm "/tmp/"`pwd | sed -e 's:/:_:g'`"_actions" && rm "/tmp/"`pwd | sed -e 's:/:_:g'`"_providers</code>
