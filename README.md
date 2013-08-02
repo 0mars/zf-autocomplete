@@ -31,4 +31,4 @@ Flush / Clear Cache
 -----------------
 Execute the following on the same directory to clear cache on that directory:
 
-<code>rm "/tmp/"`pwd | sed -e 's:/:_:g'`"_actions" && rm "/tmp/"`pwd | sed -e 's:/:_:g'`"_providers</code>
+<code>rm "/tmp/"\`pwd | sed -e 's:/:_:g'\`"_actions" && rm "/tmp/"\`pwd | sed -e 's:/:_:g'\`"_providers"</code>
