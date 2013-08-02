@@ -13,7 +13,7 @@ Installation
 
 Then move to bash_autocompletion
 
-<code>sudo mv zf-autocomplete/zf /etc/bash_completion.d</code>
+<code>sudo mv zf-autocomplete/zf /etc/bash_completion.d/</code>
 
 I you want to run it immediately in the same opened shell you can do the following command
 <code>. /etc/bash_completion.d/zf</code>
